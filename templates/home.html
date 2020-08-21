@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<title>web-tool</title>
+<body>
+	<div><center>TIVA-Tesing-UI</center></div>
+	<h3>Home Page</h3>
+	<p><u>Categories</u></p>
+
+	<table style="width:50%">
+	{%- for row in category|batch(2, '&nbsp;') %}
+  		<tr>
+  		{%- for column in row %}
+		<td><a href='{{url_for('catRecipes', cat_id =1 ) }}'>{{ column }}</a></td>
+  		{%- endfor %}
+  		</tr>
+	{%- endfor %}
+	</table>
+
+	</br>
+	<p><u>Recipes</u></p>
+
+	<table style="width:50%">
+	{%- for row in recipes|batch(3, '&nbsp;') %}
+  		<tr>
+  		{%- for column in row %}
+    		<td>{{ column }}</td>
+  		{%- endfor %}
+  		</tr>
+	{%- endfor %}
+	</table>
+
+	</br>
+	<p><a href="">Create Recipe</a></p>
+	</br>
+
+</body>
+</html>
+

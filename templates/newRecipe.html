@@ -1,0 +1,43 @@
+<html>
+<body>
+<h3> New Recipe </h3>
+
+<form action="{{ url_for('createRecipe') }}" method = 'POST'>
+<table>
+<tr>
+    <td>Recipe Name</td>
+    <td>:</td>
+    <td><input type='text' size='30' name='name' placeholder='Recipe Name'></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>Cooking Time in Minutes</td>
+    <td>:</td>
+    <td><input type='text' size='30' name='minutes' placeholder='Cooking Time in Minutes'></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>Ingredient 1</td>
+    <td>:</td>
+    <td><input type='text' size='20' name='one' placeholder='Ingredient 1'></td>
+    <td><input type='text' size='2' name='qtyone' placeholder='Qty 1'></td>
+    <td>this is a list</td>
+</tr>
+<tr>
+    <td>Ingredient 2</td>
+    <td>:</td>
+    <td><input type='text' size='20' name='two' placeholder='Ingredient 2'></td>
+    <td><input type='text' size='2' name='qtytwo' placeholder='Qty 2'></td>
+    <td>this is a list</td>
+</tr>
+
+</table>
+</br>
+<input type='submit' value='Create'>
+
+</form>
+
+</body>
+</html>
