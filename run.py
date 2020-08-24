@@ -2,27 +2,25 @@ from flask import Flask, render_template, url_for, request, redirect, json
 import util
 
 app = Flask(__name__)
-category = []
-recipes = []
 
 @app.route('/')
 @app.route('/tiva/')
 def tivaHome():
-    empty_recipes = util.clear_recipes_list() 
-    empty_category = util.clear_category_list() 
-    recipes = util.list_all_names()
-    categories = util.list_categories()
-    return render_template('home.html', category=categories, recipes=recipes)
+    allrecipes = util.list_all_names()
+    allcats = util.list_categories()
+    return render_template('home.html', hpcat=allcats, hprecipes=allrecipes)
 
-@app.route('/tiva/<int:cat_id>/')
-def catRecipes(cat_id):
-    return render_template('cat-recipes.html')
+@app.route('/tiva/<cat>/', methods=['GET','POST'])
+def catRecipes(cat):
+    recipes = util.list_cat_recipes(cat)
+    return render_template('cat-recipes.html',category=cat,cat_len=len(recipes),cat_recipes=recipes)
 
 # Task 1: Create route for newRecipeItem function here
 
-@app.route('/tiva/<int:cat_id>/new')
-def newRecipe(cat_id):
-    return render_template('cat-recipes.html')
+@app.route('/tiva/<cat>/new/', methods=['GET','POST'])
+def newRecipe(cat):
+    return "page to create a new menu item. Task 1 complete!"
+    #return render_template('newRecipe.html')
 
 # Task 2: Create route for editRecipeItem function here
 
