@@ -5,12 +5,17 @@
 	<div><center>TIVA-Tesing-UI</center></div>
 	</br>
 	<h3><u>Recipes</u></h3>
-	<p>Find all recipes in the category:.................</p>
-	 <table style="width:50%">
-  		<tr><td>category[1] </td><td>category[1][2]</td></tr>
-  		<tr><td>category[1] </td><td>category[1][2]</td></tr>
-  		<tr><td>category[1] </td><td>category[1][2]</td></tr>
-  		<tr><td>category[1] </td><td>category[1][2]</td></tr>
+
+	<p>Find all recipes in the category:<b> {{ category }} </b></p>
+	</br>
+	{% print(cat_recipes) %}
+
+	<table style="width:50%">
+	{% for i in range(0, cat_len) %}
+	<tr>
+	<td><a href="">{{ cat_recipes[i] }}</a></td>
+  	</tr>
+	{% endfor %}
 	</table>
 	</br>
 </body>

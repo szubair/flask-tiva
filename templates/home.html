@@ -7,10 +7,10 @@
 	<p><u>Categories</u></p>
 
 	<table style="width:50%">
-	{%- for row in category|batch(2, '&nbsp;') %}
+	{%- for row in hpcat|batch(2, '&nbsp;') %}
   		<tr>
   		{%- for column in row %}
-		<td><a href='{{url_for('catRecipes', cat_id =1 ) }}'>{{ column }}</a></td>
+		<td><a href={{ column }}>{{ column }}</a></td>
   		{%- endfor %}
   		</tr>
 	{%- endfor %}
@@ -20,7 +20,7 @@
 	<p><u>Recipes</u></p>
 
 	<table style="width:50%">
-	{%- for row in recipes|batch(3, '&nbsp;') %}
+	{%- for row in hprecipes|batch(3, '&nbsp;') %}
   		<tr>
   		{%- for column in row %}
     		<td>{{ column }}</td>
@@ -30,7 +30,7 @@
 	</table>
 
 	</br>
-	<p><a href="">Create Recipe</a></p>
+	<p><a href="newRecipe.html">Create Recipe</a></p>
 	</br>
 
 </body>
