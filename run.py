@@ -19,8 +19,9 @@ def catRecipes(cat):
 
 @app.route('/tiva/<cat>/new/', methods=['GET','POST'])
 def newRecipe(cat):
-    return "page to create a new menu item. Task 1 complete!"
-    #return render_template('newRecipe.html')
+    #return "page to create a new menu item. Task 1 complete!"
+    next_filename = util.create_new_recipefile(cat)
+    return render_template('newRecipe.html',category=cat,filename=next_filename)
 
 # Task 2: Create route for editRecipeItem function here
 

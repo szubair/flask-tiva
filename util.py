@@ -3,6 +3,15 @@ import json, os, pprint
 
 response = []
 
+def list_cat_filenames(cat):
+    cat_filenames = []
+    all_json_files = os.listdir('/home/sabeer/TIVA/web/json')
+    for json_filename in all_json_files:
+        cat_filename = json_filename.split('-')[0]
+        if cat_filename == cat:
+            cat_filenames.append(json_filename)
+    return sorted(cat_filenames)
+
 def list_cat_recipes(cat):
     cat_recipes = []
     allfiles = os.listdir('/home/sabeer/TIVA/web/json')
@@ -15,7 +24,7 @@ def list_cat_recipes(cat):
                 cat_recipe_name = recipe_data['Name']
             #print('The recipe %s comes under the category %s.' % (cat_recipe_name,cat))
             cat_recipes.append(cat_recipe_name)
-    return cat_recipes
+    return cat_recipes 
 
 def list_categories():
     category = []
@@ -27,19 +36,14 @@ def list_categories():
             category.append(cat_name)
     return category
 
-'''
-def print_recipes():
-    response = list_all_names()
-    count = 0
-    for ele in response:
-        print(ele, end='\t')
-        #print(ele),
-        count = count + 1
-        if count % 3 == 0:
-            print()
-    return response
-'''
-
+def create_new_recipefile(cat):
+    #recipe_name = 'cat-next_number.json'
+    json_files = list_cat_filenames(cat)
+    last_filename = json_files[-1]
+    last_number = last_filename.split('-')[1].strip('.json')
+    next_number = int(last_number) + 1
+    new_recipe_name = cat + '-' + str(next_number) + '.json'
+    return new_recipe_name
 
 def list_all_names():
     recipe_names = []
@@ -54,6 +58,6 @@ def list_all_names():
     return recipe_names
 
 
-#print(list_cat_recipes('Tea'))
-#print(list_categories())
+print(create_new_recipefile('Tea'))
+#print(list_cat_filenames('cakes'))
 
