@@ -1,13 +1,15 @@
 <html>
 <body>
-<h3> New Recipe </h3>
+</br>
+<p> Create New Recipe for the Category:<b>{{ cat }}</b></p>
+</br>
+<form action="{{url_for('newRecipeItem', cat=cat)}}" method = 'POST'>
 
-<form action="{{ url_for('createRecipe') }}" method = 'POST'>
 <table>
 <tr>
     <td>Recipe Name</td>
     <td>:</td>
-    <td><input type='text' size='30' name='name' placeholder='Recipe Name'></td>
+    <td><input type='text' size='30' name='recipe_name' placeholder='Recipe Name'></td>
     <td></td>
     <td></td>
 </tr>

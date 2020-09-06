@@ -19,8 +19,6 @@ def catRecipes(cat):
 @app.route('/tiva/<cat>/new/', methods=['GET','POST'])
 def newRecipeItem(cat):
     #return "page to create a new menu item. Task 1 complete!"
-    newFileName = util.create_new_recipefile(cat)
-    print('filename', newFileName)
     if request.method == 'POST':
         return redirect(url_for('viewRecipeItem', cat=cat,recipe_id=10))
     else:
@@ -29,8 +27,18 @@ def newRecipeItem(cat):
 # Display the content of the recipe
 @app.route('/tiva/<cat>/<int:recipe_id>')
 def viewRecipeItem(cat, recipe_id):
-    #return 'ok. new recipe is created!'
-    return render_template('Recipe.html',cat=cat)
+    return 'ok. new recipe is created!'
+
+# Task 2: Create route for editRecipeItem function here
+@app.route('/tiva/<cat>/<int:recipe_id>/edit/')
+def editRecipeItem(cat, recipe_id):
+    return "page to edit a menu item. Task 2 complete!"
+
+# Task 3: Create a route for deleteMenuItem function here
+@app.route('/tiva/<cat>/<int:recipe_id>/delete/')
+def deleteRecipeItem(cat, recipe_id):
+    return "page to delete a menu item. Task 3 complete!"
+
 
 if __name__ == '__main__':
     app.debug = True

@@ -2,10 +2,12 @@
 import json, os, pprint
 
 response = []
+cwd = os.getcwd()
+jsonDir = cwd + '/json'
 
 def list_cat_filenames(cat):
     cat_filenames = []
-    all_json_files = os.listdir('/home/sabeer/TIVA/web/json')
+    all_json_files = os.listdir(jsonDir)
     for json_filename in all_json_files:
         cat_filename = json_filename.split('-')[0]
         if cat_filename == cat:
@@ -14,12 +16,12 @@ def list_cat_filenames(cat):
 
 def list_cat_recipes(cat):
     cat_recipes = []
-    allfiles = os.listdir('/home/sabeer/TIVA/web/json')
+    allfiles = os.listdir(jsonDir)
     for rfile in allfiles:
         cat_filename = rfile.split('-')[0]
         if cat_filename == cat:
             #print('cat_filename:', rfile)
-            with open('/home/sabeer/TIVA/web/json/%s' % rfile) as f:
+            with open(jsonDir + '/%s' % rfile) as f:
                 recipe_data = json.load(f)
                 cat_recipe_name = recipe_data['Name']
             #print('The recipe %s comes under the category %s.' % (cat_recipe_name,cat))
@@ -29,7 +31,7 @@ def list_cat_recipes(cat):
 def list_categories():
     category = []
     i = 0
-    json_files = os.listdir('/home/sabeer/TIVA/web/json')
+    json_files = os.listdir(jsonDir)
     for each_file in json_files:
         cat_name = each_file.split('-')[0]
         if cat_name not in category:
@@ -47,9 +49,9 @@ def create_new_recipefile(cat):
 
 def list_all_names():
     recipe_names = []
-    json_files = os.listdir('/home/sabeer/TIVA/web/json')
+    json_files = os.listdir(jsonDir)
     for each_file in json_files:
-        with open('/home/sabeer/TIVA/web/json/%s' % each_file) as f:
+        with open(jsonDir + '/%s' % each_file) as f:
             data = json.load(f)
         #print(each_file, data)
         name = data['Name']
