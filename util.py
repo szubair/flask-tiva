@@ -1,9 +1,13 @@
 ##supportive functions to create the web application.
-import json, os, pprint
+import json, os, pprint, random
 
 response = []
 cwd = os.getcwd()
 jsonDir = cwd + '/json'
+
+def get_new_id():
+    new_id = random.randint(0,101)
+    return new_id
 
 def list_cat_filenames(cat):
     cat_filenames = []
@@ -51,14 +55,20 @@ def get_recipe_json(cat,rid):
             data_json = json.load(fj)
     return data_json
 
-def create_new_recipefile(cat):
-    #recipe_name = 'cat-next_number.json'
+def create_new_recipe_fn(cat):
+    ###generate next_randint_number
     json_files = list_cat_filenames(cat)
     last_filename = json_files[-1]
-    last_number = last_filename.split('-')[1].strip('.json')
-    next_number = int(last_number) + 1
+    next_number = get_new_id()
     new_recipe_name = cat + '-' + str(next_number) + '.json'
-    return new_recipe_name
+    all_files = os.listdir(jsonDir)
+    if new_recipe_name not in all_files:
+        return new_recipe_name
+    else:
+        #avaiable, do check next random number
+        next_number = get_new_id()
+        new_recipe_name = cat + '-' + str(next_number) + '.json'
+        return new_recipe_name
 
 def list_all_names():
     recipe_names = []
@@ -76,6 +86,6 @@ def list_all_names():
 
 #print get_recipe_json('cakes',4)
 #print list_all_names()
-#print(create_new_recipefile('Tea'))
+print(create_new_recipe_fn('cakes'))
 #print(list_cat_filenames('cakes'))
 
