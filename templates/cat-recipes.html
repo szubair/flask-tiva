@@ -10,12 +10,11 @@
 
 	<p>Find all recipes in the category:<b> {{ category }} </b></p>
 	</br>
-	{% print(cat_recipes) %}
-
+	</br>
 	<table style="width:50%">
-	{% for i in range(0, cat_len) %}
+	{% for e in range(0, cat_len) %}
 	<tr>
-	<td><a href="">{{ cat_recipes[i] }}</a></td>
+		<td><a href={{ e + 1 }}>{{ cat_recipes[e] }}</a></td>
   	</tr>
 	{% endfor %}
 	</table>

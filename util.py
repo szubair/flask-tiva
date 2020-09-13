@@ -26,7 +26,7 @@ def list_cat_recipes(cat):
                 cat_recipe_name = recipe_data['Name']
             #print('The recipe %s comes under the category %s.' % (cat_recipe_name,cat))
             cat_recipes.append(cat_recipe_name)
-    return cat_recipes 
+    return cat_recipes
 
 def list_categories():
     category = []
@@ -37,6 +37,19 @@ def list_categories():
         if cat_name not in category:
             category.append(cat_name)
     return category
+
+def get_recipe_json(cat,rid):
+    item_name = cat + '-' + str(rid) + '.json'
+    print('FileName =>', item_name)
+    json_files = list_cat_filenames(cat)
+    if item_name in json_files:
+        #read the json file 
+        fn_items = [jsonDir, '/',item_name]
+        filename_with_path = ''.join(fn_items)
+        print('result ===', filename_with_path)
+        with open(filename_with_path) as fj:
+            data_json = json.load(fj)
+    return data_json
 
 def create_new_recipefile(cat):
     #recipe_name = 'cat-next_number.json'
@@ -51,6 +64,7 @@ def list_all_names():
     recipe_names = []
     json_files = os.listdir(jsonDir)
     for each_file in json_files:
+        #print('filename:::', jsonDir + '/' + each_file)
         with open(jsonDir + '/%s' % each_file) as f:
             data = json.load(f)
         #print(each_file, data)
@@ -60,6 +74,8 @@ def list_all_names():
     return recipe_names
 
 
-print(create_new_recipefile('Tea'))
+#print get_recipe_json('cakes',4)
+#print list_all_names()
+#print(create_new_recipefile('Tea'))
 #print(list_cat_filenames('cakes'))
 

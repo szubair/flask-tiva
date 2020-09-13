@@ -2,10 +2,9 @@
 <html>
 <title>web-tool</title>
 <body>
-	<div><center>Home Page: TIVA-Tesing-UI</center></div>
-	<h3>Recipe Management Module</h3>
-	<p><u>Categories</u></p>
-
+	<h3><center>TIVA-Tesing-UI</center></h3>
+	<h4><center>Recipe Management Module</center></h4>
+	<h4><u>Categories</u></h4>
 	<table style="width:50%">
 	{%- for row in hpcat|batch(2, '&nbsp;') %}
   		<tr>
@@ -17,13 +16,12 @@
 	</table>
 
 	</br>
-	<p><u>Recipes</u></p>
-
+	<h4><u>Recipes</u></h4>
 	<table style="width:50%">
 	{%- for row in hprecipes|batch(3, '&nbsp;') %}
   		<tr>
   		{%- for column in row %}
-    		<td>{{ column }}</td>
+		<td>{{ column }}</td>
   		{%- endfor %}
   		</tr>
 	{%- endfor %}
