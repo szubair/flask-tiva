@@ -5,16 +5,14 @@
 	<div><center>TIVA-Tesing-UI</center></div>
 	</br>
 	<h3><u>Recipes</u></h3>
-	</br>
 	<a href=new/>Create New</a></td>
-
+	</br>
+	</br>
 	<p>Find all recipes in the category:<b> {{ category }} </b></p>
-	</br>
-	</br>
 	<table style="width:50%">
-	{% for e in range(0, cat_len) %}
+	{% for key, value in recipe_dict.items() %}
 	<tr>
-		<td><a href={{ e + 1 }}>{{ cat_recipes[e] }}</a></td>
+		<td><a href={{key}}>{{value}}</a></td>
   	</tr>
 	{% endfor %}
 	</table>

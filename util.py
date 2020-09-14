@@ -25,12 +25,28 @@ def list_cat_recipes(cat):
         cat_filename = rfile.split('-')[0]
         if cat_filename == cat:
             #print('cat_filename:', rfile)
+            tmp_list = []
             with open(jsonDir + '/%s' % rfile) as f:
                 recipe_data = json.load(f)
                 cat_recipe_name = recipe_data['Name']
+                cat_recipe_id = recipe_data['id']
+            tmp_list.append(cat_recipe_name)
+            tmp_list.insert(0, cat_recipe_id)
             #print('The recipe %s comes under the category %s.' % (cat_recipe_name,cat))
-            cat_recipes.append(cat_recipe_name)
+            cat_recipes.append(tmp_list)
     return cat_recipes
+
+def get_recipe_names(cat):
+    recipes_dict = {}
+    cat_recipe_names = list_cat_recipes(cat)
+    no_of_recipes = len(cat_recipe_names)
+    count = 0
+    while no_of_recipes > count:
+        keys = cat_recipe_names[count][0]
+        values = cat_recipe_names[count][1]
+        recipes_dict[keys] = values
+        count += 1
+    return recipes_dict
 
 def list_categories():
     category = []
@@ -44,31 +60,30 @@ def list_categories():
 
 def get_recipe_json(cat,rid):
     item_name = cat + '-' + str(rid) + '.json'
-    print('FileName =>', item_name)
+    #print('FileName =>', item_name)
     json_files = list_cat_filenames(cat)
     if item_name in json_files:
         #read the json file 
         fn_items = [jsonDir, '/',item_name]
-        filename_with_path = ''.join(fn_items)
-        print('result ===', filename_with_path)
-        with open(filename_with_path) as fj:
+        filename_path = ''.join(fn_items)
+        #print('result ===', filename_path)
+        with open(filename_path) as fj:
             data_json = json.load(fj)
     return data_json
 
 def create_new_recipe_fn(cat):
     ###generate next_randint_number
     json_files = list_cat_filenames(cat)
-    last_filename = json_files[-1]
     next_number = get_new_id()
     new_recipe_name = cat + '-' + str(next_number) + '.json'
     all_files = os.listdir(jsonDir)
     if new_recipe_name not in all_files:
-        return new_recipe_name
+        next_recipe_name = new_recipe_name
     else:
-        #avaiable, do check next random number
-        next_number = get_new_id()
-        new_recipe_name = cat + '-' + str(next_number) + '.json'
-        return new_recipe_name
+        next_new_number = get_new_id()
+        next_new_recipe_name = cat + '-' + str(next_new_number) + '.json'
+        new_recipe_name = next_new_recipe_name
+    return new_recipe_name
 
 def list_all_names():
     recipe_names = []
@@ -84,8 +99,10 @@ def list_all_names():
     return recipe_names
 
 
+
+#print list_cat_recipes('Tea')
+print get_recipe_names('cakes')
 #print get_recipe_json('cakes',4)
 #print list_all_names()
-print(create_new_recipe_fn('cakes'))
 #print(list_cat_filenames('cakes'))
 

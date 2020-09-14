@@ -13,23 +13,23 @@ def tivaHome():
     return render_template('home.html', hpcat=allcats, hprecipes=allrecipes)
 
 @app.route('/tiva/<cat>/', methods=['GET','POST'])
-def catRecipes(cat):
-    recipes = util.list_cat_recipes(cat)
-    cat_sum = len(recipes)
-    print("No. of recipes:", cat_sum) 
-    return render_template('cat-recipes.html',category=cat,cat_len=cat_sum,cat_recipes=recipes)
+def getCatRecipes(cat):
+    cat_recipes_dict = util.get_recipe_names(cat)
+    #print(cat_recipes_dict)
+    return render_template('cat-recipes.html',category=cat,recipe_dict=cat_recipes_dict)
 
-# Task 1: Create route for newRecipeItem function here
+# Task 1: Create new recipes in the category.
 @app.route('/tiva/<cat>/new/', methods=['GET','POST'])
 def newRecipeItem(cat):
     recipe_items = {}
-    newFileName = util.create_new_recipefile(cat)
+    newFileName = util.create_new_recipe_fn(cat)
     print('New filename:', newFileName)
     new_id = newFileName.split('-')[1]
     print('Recipe id =>', new_id.strip('.json'))
     new_recipe_id = new_id.strip('.json')
     recipe_fn = recipe_dir + newFileName
     if request.method == 'POST':
+        recipe_items['id'] = new_recipe_id
         recipe_items['Name'] = request.form['recipe_name']
         recipe_items['Minutes'] = request.form['minutes']
         #print('values ....', recipe_items)
