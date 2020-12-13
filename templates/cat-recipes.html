@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+	<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
 <title>web-tool</title>
 <body>
 	<div><center>TIVA-Tesing-UI</center></div>
 	</br>
+	<div class = 'pane'>
 	<h3><u>Recipes</u></h3>
 	<a href=new/>Create New</a></td>
 	</br>
@@ -17,6 +21,7 @@
 	{% endfor %}
 	</table>
 	</br>
+	</div>
 </body>
 </html>
 
