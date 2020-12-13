@@ -26,7 +26,7 @@ def list_cat_recipes(cat):
         if cat_filename == cat:
             #print('cat_filename:', rfile)
             tmp_list = []
-            with open(jsonDir + '/%s' % rfile) as f:
+            with open(jsonDir + '%s' % rfile) as f:
                 recipe_data = json.load(f)
                 cat_recipe_name = recipe_data['Name']
                 cat_recipe_id = recipe_data['id']
@@ -107,9 +107,9 @@ def list_all_names():
 
 
 
-#print list_cat_recipes('Tea')
+print list_cat_recipes('Tea')
 #print get_recipe_names('cakes')
 #print get_recipe_json('cakes',4)
-print list_all_names()
+#print list_all_names()
 #print(list_cat_filenames('cakes'))
 

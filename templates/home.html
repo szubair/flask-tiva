@@ -6,7 +6,8 @@
 	<h4><center>Recipe Management Module</center></h4>
 	<h4><u>Categories</u></h4>
 	<table style="width:50%">
-	{%- for row in hpcat|batch(2, '&nbsp;') %}
+	{% set cat = ['Tea','Cakes','Pizza','Sweets']%}
+	{%- for row in cat|batch(2, '&nbsp;') %}
   		<tr>
   		{%- for column in row %}
 		<td><a href={{ column }}>{{ column }}</a></td>
