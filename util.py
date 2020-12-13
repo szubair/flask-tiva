@@ -3,7 +3,7 @@ import json, os, pprint, random
 
 response = []
 cwd = os.getcwd()
-jsonDir = cwd + '/json'
+jsonDir = cwd + '/json/'
 
 def get_new_id():
     new_id = random.randint(0,101)
@@ -88,10 +88,17 @@ def create_new_recipe_fn(cat):
 def list_all_names():
     recipe_names = []
     json_files = os.listdir(jsonDir)
+    #print('files under json folder:', json_files)
     for each_file in json_files:
         #print('filename:::', jsonDir + '/' + each_file)
-        with open(jsonDir + '/%s' % each_file) as f:
-            data = json.load(f)
+        try:
+           if os.stat(jsonDir + '%s' % each_file).st_size > 0:
+              with open(jsonDir + '%s' % each_file) as f:
+                 data = json.load(f)
+           else:
+               print("Json file: %s is empty!! " % each_file)
+        except OSError:
+            print "No File"
         #print(each_file, data)
         name = data['Name']
         #print('receipe name:', name)
@@ -103,6 +110,6 @@ def list_all_names():
 #print list_cat_recipes('Tea')
 #print get_recipe_names('cakes')
 #print get_recipe_json('cakes',4)
-#print list_all_names()
+print list_all_names()
 #print(list_cat_filenames('cakes'))
 
