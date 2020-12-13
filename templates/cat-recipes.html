@@ -5,18 +5,17 @@
 	</head>
 <title>web-tool</title>
 <body>
-	<div><center>TIVA-Tesing-UI</center></div>
-	</br>
+	<h1><center>Recipe Management Module</center></h1>
 	<div class = 'pane'>
-	<h3><u>Recipes</u></h3>
+	<h4><u>Recipes</u></h4>
 	<a href=new/>Create New</a></td>
 	</br>
 	</br>
-	<p>Find all recipes in the category:<b> {{ category }} </b></p>
+	<h4>Find all recipes in the category: {{ category }}</h4>
 	<table style="width:50%">
 	{% for key, value in recipe_dict.items() %}
 	<tr>
-		<td><a href={{key}}>{{value}}</a></td>
+		<td><a href={{key}}><b>{{value}}</a></b></td>
   	</tr>
 	{% endfor %}
 	</table>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
+	<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
 <title>web-tool</title>
 <body>
-	<div class = 'pane'>
-	<h3><center>TIVA-Tesing-UI</center></h3>
-	<h4><center>Recipe Management Module</center></h4>
+	<h1><center>Recipe Management Module</center></h1>
+<div class = 'pane'>
 	<h4><u>Categories</u></h4>
 	<table style="width:50%">
 	{% set cat = ['Tea','Cakes','Pizza','Sweets']%}
 	{%- for row in cat|batch(2, '&nbsp;') %}
   		<tr>
   		{%- for column in row %}
-		<td><a href={{ column }}>{{ column }}</a></td>
+		<td><a href={{ column }}><b>{{ column }}</b></a></td>
   		{%- endfor %}
   		</tr>
 	{%- endfor %}
@@ -28,7 +30,7 @@
   		</tr>
 	{%- endfor %}
 	</table>
-	</div>
+</div>
 
 </body>
 </html>

@@ -1,8 +1,13 @@
 <html>
+	<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
 <body>
 </br>
-<p> Create New Recipe for the Category:<b>{{ cat }}</b></p>
-</br>
+<h1><center>Recipe Management Module</center></h1>
+<div class = 'pane'>
+	<h4>Create New Recipe for the Category: {{ cat }}</h4>
+
 <form action="{{url_for('newRecipeItem', cat=cat)}}" method = 'POST'>
 
 <table>
@@ -41,5 +46,6 @@
 
 </form>
 
+</div>
 </body>
 </html>
