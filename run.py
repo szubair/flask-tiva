@@ -1,9 +1,10 @@
 from flask import Flask,render_template,url_for,request,redirect
-import util,os,pprint,json
+import util,os,pprint,json,subprocess
 
 app = Flask(__name__)
 cwd = os.getcwd()
 recipe_dir = cwd + '/json/'
+res_output = ""
 
 @app.route('/')
 @app.route('/tiva/')
@@ -45,6 +46,30 @@ def viewRecipeItem(cat, recipe_id):
     if request.method == 'GET' or 'POST':
         data = util.get_recipe_json(cat,recipe_id)
     return render_template('Recipe.html',cat=cat,recipe_id=recipe_id,data=data)
+
+# Edit recipe items
+@app.route('/tiva/<cat>/<int:recipe_id>/edit', methods=['GET', 'POST'])
+def editRecipeItem(cat, recipe_id):
+    itemToEdit = 'checking'
+    if request.method == 'POST':
+        print('delete it')
+        return redirect(url_for('getCatRecipes', cat=cat, recipe_id=recipe_id))
+    else:
+        return render_template('edit-item.html', item=itemToEdit)
+
+# Delete recipe items
+@app.route('/tiva/<cat>/<int:recipe_id>/delete', methods=['GET', 'POST'])
+def deleteRecipeItem(cat, recipe_id):
+    if request.method == 'POST':
+        res_value = util.remove_filename(cat, recipe_id)
+        print('response value', res_value)
+        if res_value == 0:
+            #return "Delete recipe_id: %d from the category: %s" % (recipe_id,cat)
+            print('file has been removed')
+        return redirect(url_for('getCatRecipes',cat=cat))
+    else:
+        return render_template('del-item.html', cat=cat,recipe_id=recipe_id) 
+
 
 if __name__ == '__main__':
     app.debug = True

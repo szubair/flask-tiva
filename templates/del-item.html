@@ -1,0 +1,24 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+<body>
+<h1><center>Recipe Management Module</center></h1>
+<div class = 'pane'>
+
+<h3> Are you sure you want to delete {{recipe_id}}? </h3>
+
+<form action="{{ url_for('deleteRecipeItem',cat=cat, recipe_id=recipe_id) }}" method = 'POST'>
+
+<input type='submit', value = 'Delete'>
+
+
+</form>
+
+<center>
+<a href = '{{url_for('getCatRecipes', cat = cat)}}'> Cancel </a>
+</center>
+</div>
+</body>
+
+</html>
