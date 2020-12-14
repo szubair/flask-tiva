@@ -1,5 +1,5 @@
 ##supportive functions to create the web application.
-import json, os, pprint, random
+import json, os, pprint, random,subprocess
 
 response = []
 cwd = os.getcwd()
@@ -17,6 +17,18 @@ def list_cat_filenames(cat):
         if cat_filename == cat:
             cat_filenames.append(json_filename)
     return sorted(cat_filenames)
+
+def remove_filename(cat, rid):
+    recipe_strid = str(rid)
+    filename_todelete = cat + '-' + recipe_strid + '.json'
+    print('sample:,...', filename_todelete)
+    all_json_files = os.listdir(jsonDir)
+    if filename_todelete in all_json_files:
+        print('removing filename', filename_todelete)
+        res = os.system("rm %s" % jsonDir + filename_todelete)
+        return res
+    else:
+        return "file not found"
 
 def list_cat_recipes(cat):
     cat_recipes = []
@@ -107,9 +119,7 @@ def list_all_names():
 
 
 
-print list_cat_recipes('Tea')
-#print get_recipe_names('cakes')
-#print get_recipe_json('cakes',4)
-#print list_all_names()
+#print list_cat_recipes('Tea')
+print remove_filename('Tea',7)
 #print(list_cat_filenames('cakes'))
 

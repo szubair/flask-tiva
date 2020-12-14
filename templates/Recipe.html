@@ -14,9 +14,9 @@
 <br>
 
 <center>
-<a href = '/tiva'> Home </a>
-<input type='submit' value='Edit'>
-<a href = ''> Cancel </a>
+<a href = '/tiva'> Home </a>|
+<a href = '{{ url_for('editRecipeItem', cat = cat, recipe_id = recipe_id) }}'> Edit </a>|
+<a href = '{{ url_for('deleteRecipeItem', cat =cat, recipe_id = recipe_id) }}'> Delete </a>
 </center>
 </div>
 </body>
