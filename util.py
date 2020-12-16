@@ -18,6 +18,31 @@ def list_cat_filenames(cat):
             cat_filenames.append(json_filename)
     return sorted(cat_filenames)
 
+def read_recipefile(cat, rid):
+    recipe_rid = str(rid)
+    filename_toread = cat + '-' + recipe_rid + '.json'
+    if filename_toread in os.listdir(jsonDir):
+        print('inside if filename:', filename_toread)
+        with open(jsonDir + filename_toread) as myfile:
+            myjson_obj = json.load(myfile)
+    else:
+        return "File Not Found"
+    return myjson_obj['Name']
+
+def update_recipefile(cat, rid, name):
+    str_id = str(rid)
+    filename_toupdate = cat + '-' + str_id + '.json'
+    if filename_toupdate in os.listdir(jsonDir):
+        print('inside if filename:', filename_toupdate)
+        with open(jsonDir + filename_toupdate,'r+') as update_file:
+            updatejson_obj = json.load(update_file)
+            updatejson_obj['Name'] = name
+            update_file.seek(0)
+            update_file.truncate()
+            json.dump(updatejson_obj, update_file)
+    return updatejson_obj
+
+
 def remove_filename(cat, rid):
     recipe_strid = str(rid)
     filename_todelete = cat + '-' + recipe_strid + '.json'
@@ -120,6 +145,6 @@ def list_all_names():
 
 
 #print list_cat_recipes('Tea')
-print remove_filename('Tea',7)
+print update_recipefile('Cakes',36,'JackFruit')
 #print(list_cat_filenames('cakes'))
 
