@@ -3,16 +3,23 @@
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 <body>
-<h1> Are you sure you want to delete {{recipe_id}}? </h1>
+<h1><center>Recipe Management Module</center></h1>
+<div class = 'pane'>
 
-<form action="{{ url_for('deleteRecipeItem',cat=cat, recipe_id=recipe_id)}}" method = 'post'>
-
-<input type='submit', value = 'Delete'>
+<h3> Edit Recipe </h3>
 
 
+<form action="{{ url_for('editRecipeItem',cat=cat, recipe_id=recipe_id)}}" method = 'post'>
+<dl>
+	<dt>Recipe Name:</dt>
+	<dd><input type ='text' size='30' name='name' value='{{name}}'placeholder='{{name}}'></dd>
+</dl>
+
+<center>
+<input type='submit', value = 'Edit'>
+<a href = '{{url_for('getCatRecipes', cat = cat)}}'> Cancel </a>
+</center>
 
 </form>
-<a href = '{{url_for('getCatRecipes', cat = cat)}}'> Cancel </a>
-
 </body>
 </html>

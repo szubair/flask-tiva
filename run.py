@@ -50,12 +50,14 @@ def viewRecipeItem(cat, recipe_id):
 # Edit recipe items
 @app.route('/tiva/<cat>/<int:recipe_id>/edit', methods=['GET', 'POST'])
 def editRecipeItem(cat, recipe_id):
-    itemToEdit = 'checking'
+    recipe_name = util.read_recipefile(cat, recipe_id)
     if request.method == 'POST':
-        print('delete it')
-        return redirect(url_for('getCatRecipes', cat=cat, recipe_id=recipe_id))
+        edit_name = request.form['name']
+        print('lets edit it....')
+        updatedData = util.update_recipefile(cat,recipe_id,edit_name)
+        return redirect(url_for('viewRecipeItem', cat=cat,recipe_id=recipe_id))
     else:
-        return render_template('edit-item.html', item=itemToEdit)
+        return render_template('edit-item.html', cat=cat, recipe_id=recipe_id, name=recipe_name)
 
 # Delete recipe items
 @app.route('/tiva/<cat>/<int:recipe_id>/delete', methods=['GET', 'POST'])
