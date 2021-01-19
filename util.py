@@ -135,7 +135,7 @@ def list_all_names():
            else:
                print("Json file: %s is empty!! " % each_file)
         except OSError:
-            print("No File")
+            print "No File"
         #print(each_file, data)
         name = data['Name']
         #print('receipe name:', name)
