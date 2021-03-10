@@ -7,20 +7,19 @@ recipe_dir = cwd + '/json/'
 res_output = ""
 
 @app.route('/')
-@app.route('/tiva/')
 def tivaHome():
     allrecipes = util.list_all_names()
     allcats = util.list_categories()
     return render_template('home.html', hpcat=allcats, hprecipes=allrecipes)
 
-@app.route('/tiva/<cat>/', methods=['GET','POST'])
+@app.route('/<cat>/', methods=['GET','POST'])
 def getCatRecipes(cat):
     cat_recipes_dict = util.get_recipe_names(cat)
     #print(cat_recipes_dict)
     return render_template('cat-recipes.html',category=cat,recipe_dict=cat_recipes_dict)
 
 # Task 1: Create new recipes in the category.
-@app.route('/tiva/<cat>/new/', methods=['GET','POST'])
+@app.route('/<cat>/new/', methods=['GET','POST'])
 def newRecipeItem(cat):
     recipe_items = {}
     newFileName = util.create_new_recipe_fn(cat)
@@ -41,14 +40,14 @@ def newRecipeItem(cat):
         return render_template('newrecipe-item.html', cat=cat)
 
 # Display the content of the recipe
-@app.route('/tiva/<cat>/<int:recipe_id>')
+@app.route('/<cat>/<int:recipe_id>')
 def viewRecipeItem(cat, recipe_id):
     if request.method == 'GET' or 'POST':
         data = util.get_recipe_json(cat,recipe_id)
     return render_template('Recipe.html',cat=cat,recipe_id=recipe_id,data=data)
 
 # Edit recipe items
-@app.route('/tiva/<cat>/<int:recipe_id>/edit', methods=['GET', 'POST'])
+@app.route('/<cat>/<int:recipe_id>/edit', methods=['GET', 'POST'])
 def editRecipeItem(cat, recipe_id):
     recipe_name = util.read_recipefile(cat, recipe_id)
     if request.method == 'POST':
@@ -60,7 +59,7 @@ def editRecipeItem(cat, recipe_id):
         return render_template('edit-item.html', cat=cat, recipe_id=recipe_id, name=recipe_name)
 
 # Delete recipe items
-@app.route('/tiva/<cat>/<int:recipe_id>/delete', methods=['GET', 'POST'])
+@app.route('/<cat>/<int:recipe_id>/delete', methods=['GET', 'POST'])
 def deleteRecipeItem(cat, recipe_id):
     if request.method == 'POST':
         res_value = util.remove_filename(cat, recipe_id)
